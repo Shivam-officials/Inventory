@@ -41,3 +41,7 @@ data class ItemDetailsUiState(
     val outOfStock: Boolean = true,
     val itemDetails: ItemDetails = ItemDetails()
 )
+/**
+ * this [itemDetailsUIState] is used only to convert it into the item and is being used in the
+ * itemDetail card for showing details of item
+ */

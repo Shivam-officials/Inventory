@@ -68,15 +68,40 @@ android {
 
 dependencies {
     // Import the Compose BOM
-    implementation(platform("androidx.compose:compose-bom:2023.10.01"))
-    implementation("androidx.activity:activity-compose:1.8.1")
+    implementation(platform("androidx.compose:compose-bom:2024.04.01"))
+    implementation("androidx.activity:activity-compose:1.9.0")
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.ui:ui-tooling")
     implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2")
-    implementation("androidx.navigation:navigation-compose:2.7.5")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.7.0")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
+
+
+    /**
+     * **Room runtime library**
+     *  This library provides the core functionalities of Room to interact with the database at runtime.
+     *   For instance, it allows us to define DAOs (Data Access Objects) to perform database operations.
+     */
+    implementation("androidx.room:room-runtime:2.6.1")
+
+    /**
+     * **Room compiler library (for Kotlin projects)**
+     *  This library generates code based on our database schema annotations at compile time.
+     *  These annotations provide information about our database tables and entities.
+     *  The generated code improves performance and simplifies development with Room by handling repetitive tasks.
+     */
+    ksp("androidx.room:room-compiler:2.6.1")
+
+    /**
+     * **Room Kotlin extensions library**
+     *  This library provides Kotlin extensions for Room, making the code more concise and idiomatic for Kotlin development.
+     *  These extensions offer functions and properties that streamline working with Room in Kotlin.
+     */
+    implementation("androidx.room:room-ktx:2.6.1")
+
+
 
     // Testing
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")

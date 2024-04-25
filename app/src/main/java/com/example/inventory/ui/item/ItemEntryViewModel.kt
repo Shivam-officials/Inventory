@@ -55,9 +55,17 @@ class ItemEntryViewModel : ViewModel() {
  */
 data class ItemUiState(
     val itemDetails: ItemDetails = ItemDetails(),
-    val isEntryValid: Boolean = false
+    val isEntryValid: Boolean = false /** using entry valid so that we can play with button enabled or not */
 )
 
+/**
+ * i think we are converting the item data class to itemDetails so that the data is in the string bcz
+ * its my assumption that data should be flow in string in screens and other reason is
+ * textFields can only show string as they take input only string so we are converting them in string perhaps this might
+ * be the reason that we should make our data flow in the string bcz major things accepts strings and if its string
+ * we can convert it in any suitable data type
+ *
+ */
 data class ItemDetails(
     val id: Int = 0,
     val name: String = "",

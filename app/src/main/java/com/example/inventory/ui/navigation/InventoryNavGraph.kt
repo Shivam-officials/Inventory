@@ -65,6 +65,7 @@ fun InventoryNavHost(
                 type = NavType.IntType
             })
         ) {
+
             ItemDetailsScreen(
                 navigateToEditItem = { navController.navigate("${ItemEditDestination.route}/$it") },
                 navigateBack = { navController.navigateUp() }

@@ -122,6 +122,7 @@ private fun ItemDetailsBody(
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
 
         ItemDetails(
+            // converting hte itemDetails to the Item bt both are same class singature with diff name bt parameter types are different
             item = itemDetailsUiState.itemDetails.toItem(),
             modifier = Modifier.fillMaxWidth()
         )
@@ -232,7 +233,7 @@ private fun DeleteConfirmationDialog(
 
 @Preview(showBackground = true)
 @Composable
-fun ItemDetailsScreenPreview() {
+fun ItemDetailsBodyPreview() {
     InventoryTheme {
         ItemDetailsBody(
             ItemDetailsUiState(
@@ -244,3 +245,6 @@ fun ItemDetailsScreenPreview() {
         )
     }
 }
+
+
+

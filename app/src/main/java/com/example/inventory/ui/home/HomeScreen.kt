@@ -84,7 +84,8 @@ fun HomeScreen(
             FloatingActionButton(
                 onClick = navigateToItemEntry,
                 shape = MaterialTheme.shapes.medium,
-                modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
+                modifier = Modifier
+                    .padding(dimensionResource(id = R.dimen.padding_large))
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -123,7 +124,7 @@ private fun HomeBody(
         } else {
             InventoryList(
                 itemList = itemList,
-                onItemClick = { onItemClick(it.id) },
+                onItemClick = {item->  onItemClick(item.id) },
                 contentPadding = contentPadding,
                 modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_small))
             )
