@@ -43,6 +43,6 @@ interface ItemDao {
      * the [id] uses the colon notation in the query to reference arguments in the function.
      */
     @Query("SELECT * FROM items WHERE id = :id")
-    fun getItem(id:Int): Flow<List<Item>>
+    fun getItem(id:Int): Flow<Item>
 
 }
