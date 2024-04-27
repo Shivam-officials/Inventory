@@ -19,7 +19,7 @@ interface ItemDao {
      * also we are not getting anything in return so we can launch them in bg thread so they run 
      * and get completed on their own in the case of [insert],[update],[delete] function
      */
-    @Insert(onConflict = OnConflictStrategy.)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(item: Item)
 
     //update the item
