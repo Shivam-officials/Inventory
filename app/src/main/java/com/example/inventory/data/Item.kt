@@ -16,7 +16,6 @@
 
 package com.example.inventory.data
 
-import androidx.room.Dao
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -32,3 +31,8 @@ data class Item(
     val price: Double,
     val quantity: Int
 )
+
+
+
+
+
