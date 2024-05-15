@@ -52,6 +52,9 @@ class ItemDetailsViewModel(
         )
 
 
+    /**
+     * Reduces the quantity of the current item by 1
+     */
     fun reduceQuantityByOne() {
         viewModelScope.launch{
            val currentItem = uiState.value.itemDetails.toItem()

@@ -7,6 +7,7 @@ import com.example.inventory.data.InventoryDatabase
 import com.example.inventory.data.Item
 import com.example.inventory.data.ItemDao
 import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
@@ -92,4 +93,43 @@ class ItemDaoTest {
         assertEquals(allItems[0], item1)
         assertEquals(allItems[1], item2)
         }
+
+
+    /**
+     * testing the update item function
+     */
+    @Test
+    fun daoItemUpdates_updatesItemsInDb() = runBlocking {
+        // Add two items to the database.
+        addTwoItemsToDb()
+
+        // Update the item by replacing an existing item.
+        itemDao.update(Item(1, "Apples", 15.0, 25))
+        itemDao.update(Item(2, "Bananas", 5.0, 50))
+
+        // Get updated items.
+        val allItems = itemDao.getAllItem().first()
+
+        //asserting the items in the database have been updated correctly
+        assertEquals(allItems[0],Item(1, "Apples", 15.0, 25) )
+        assertEquals(allItems[1],Item(2, "Bananas", 5.0, 50))
+
+    }
+
+    @Test
+    fun daoItemDelete_deletesItemFromDb() = runBlocking {
+        // Add two items to the database.
+        addTwoItemsToDb()
+
+        //delete those two items
+        itemDao.delete(item1)
+        itemDao.delete(item2)
+
+        // get all the items
+        val allItems = itemDao.getAllItem().first()
+
+        // asserting that the items has been deleted and list is empty
+        assertTrue(allItems.isEmpty())
+    }
+
 }
