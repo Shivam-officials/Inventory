@@ -116,6 +116,9 @@ class ItemDaoTest {
 
     }
 
+    /**
+     * testing the delete dao function
+     */
     @Test
     fun daoItemDelete_deletesItemFromDb() = runBlocking {
         // Add two items to the database.
