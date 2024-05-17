@@ -63,8 +63,18 @@ class ItemEditViewModel(
         }
     }
 
+    /**
+     * Updates the itemUiState so that it will be reflected when user enters somethings
+     */
+    fun updateItemUiState(itemDetails: ItemDetails) {
+        itemUiState = ItemUiState(itemDetails = itemDetails, isEntryValid =  validateInput(itemDetails))
+    }
 
-
+    suspend fun updateItem(){
+        if (validateInput(itemUiState.itemDetails)) {
+            itemsRepository.updateItem(itemUiState.itemDetails.toItem())
+        }
+    }
 
     private fun validateInput(uiState: ItemDetails = itemUiState.itemDetails): Boolean {
         return with(uiState) {
