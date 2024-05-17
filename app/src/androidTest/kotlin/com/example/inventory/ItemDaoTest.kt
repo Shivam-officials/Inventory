@@ -135,4 +135,15 @@ class ItemDaoTest {
         assertTrue(allItems.isEmpty())
     }
 
+    /**
+     * testing the get item function
+     */
+    @Test
+    fun daoGetItem_returnsItemFromDb() = runBlocking {
+        // Add two items to the database.
+        addOneItemToDb()
+        val item = itemDao.getItem(1).first()
+        assertEquals(item, item1)
+    }
+
 }

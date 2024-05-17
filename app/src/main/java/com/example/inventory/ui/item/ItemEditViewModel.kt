@@ -21,13 +21,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.inventory.data.ItemsRepository
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.launch
 
 /**
  * ViewModel to retrieve and update an item from the [ItemsRepository]'s data source.
  */
 class ItemEditViewModel(
     savedStateHandle: SavedStateHandle,
+    val itemsRepository: ItemsRepository
 ) : ViewModel() {
 
     /**
@@ -36,7 +41,30 @@ class ItemEditViewModel(
     var itemUiState by mutableStateOf(ItemUiState())
         private set
 
+    // itemId is passed as an argument in the navigation graph.so fetching it out
     private val itemId: Int = checkNotNull(savedStateHandle[ItemEditDestination.itemIdArg])
+
+    /**
+     * The current item details
+     */
+    init {
+        /**
+         * Get the item details from the repository and using the viewModelScope
+         * launch function to convert the flow<item> to item using the First() operator which
+         * cancels the flow stream after receiving the first item and then convert the flow<item>
+         * to item and then we convert the item to itemUiState using the custom toItemUiState
+         * extension function
+         */
+        viewModelScope.launch{
+            itemUiState = itemsRepository.getItemStream(itemId)
+                .filterNotNull()
+                .first() // converts the flow<item> into item
+                .toItemUiState(true)
+        }
+    }
+
+
+
 
     private fun validateInput(uiState: ItemDetails = itemUiState.itemDetails): Boolean {
         return with(uiState) {
@@ -44,3 +72,4 @@ class ItemEditViewModel(
         }
     }
 }
+

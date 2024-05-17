@@ -78,6 +78,9 @@ fun ItemDetailsScreen(
     modifier: Modifier = Modifier,
     viewModel: ItemDetailsViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold(
         topBar = {
             InventoryTopAppBar(
@@ -87,7 +90,7 @@ fun ItemDetailsScreen(
             )
         }, floatingActionButton = {
             FloatingActionButton(
-                onClick = { navigateToEditItem(0) },
+                onClick = { navigateToEditItem(uiState.itemDetails.id) },
                 shape = MaterialTheme.shapes.medium,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_large))
 
@@ -100,8 +103,6 @@ fun ItemDetailsScreen(
         }, modifier = modifier
     ) { innerPadding ->
 
-        val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-        val coroutineScope = rememberCoroutineScope()
 
         ItemDetailsBody(
             itemDetailsUiState = uiState,
